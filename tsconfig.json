@@ -1,0 +1,10 @@
+{
+	"compilerOptions": {
+		"outDir": "dist",
+    "module": "ES2015",
+		"lib": ["DOM","ES2023"],
+		"target": "es2022",
+		"strict": true,
+		"moduleResolution": "node",
+	},
+}
