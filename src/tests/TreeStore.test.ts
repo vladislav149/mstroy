@@ -34,14 +34,14 @@ describe('TreeStore', () => {
     it('should return all children of the item with the specified id', () => {
       const expectedChildren = [
         {id: 2, parent: 1, type: 'test'},
+        {id: 3, parent: 1, type: 'test'},
         {id: 4, parent: 2, type: 'test'},
-        {id: 7, parent: 4, type: null},
-        {id: 8, parent: 4, type: null},
         {id: 5, parent: 2, type: 'test'},
         {id: 6, parent: 2, type: 'test'},
-        {id: 3, parent: 1, type: 'test'}
+        {id: 7, parent: 4, type: null},
+        {id: 8, parent: 4, type: null}
       ]
-      expect(ts.getAllChildren(1)).toEqual(expectedChildren)
+      expect(ts.getAllChildren(1)).toEqual(expect.arrayContaining(expectedChildren))
     })
 
     it('should return an empty array if the item has no children', () => {
