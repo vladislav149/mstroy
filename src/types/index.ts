@@ -1,6 +1,6 @@
 export interface Item {
   id: number | string
-  parent: number | string
+  parent: number | 'root'
   type?: string | null
 }
 
