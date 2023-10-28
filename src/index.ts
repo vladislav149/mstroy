@@ -1,10 +1,10 @@
-import {Item, id, hashMapId, hashMapParent, Store} from './types/index.js'
+import {Item, Id, HashMapId, HashMapParent, Store} from './types/index.js'
 import items from './data.js'
 
 class TreeStore extends Store {
   private readonly items: Item[]
-  private hashMapId: hashMapId
-  private hashMapParent: hashMapParent
+  private hashMapId: HashMapId
+  private hashMapParent: HashMapParent
 
   constructor(items: Item[]) {
     super()
@@ -27,15 +27,15 @@ class TreeStore extends Store {
     return this.items
   }
 
-  public getItem(id: id): Item {
+  public getItem(id: Id): Item {
     return this.hashMapId[id]
   }
 
-  public getChildren(id: id): Item[] {
+  public getChildren(id: Id): Item[] {
     return this.hashMapParent[id] || []
   }
 
-  public getAllChildren(id: id): Item[] {
+  public getAllChildren(id: Id): Item[] {
     return this.getChildren(id).reduce<Item[]>((acc, cur) => {
       acc.push(cur)
       acc.push(...this.getAllChildren(cur.id))
@@ -43,7 +43,7 @@ class TreeStore extends Store {
     }, [])
   }
 
-  public getAllParents(id: id): Item[] {
+  public getAllParents(id: Id): Item[] {
     const parentItem = this.getItem(this.getItem(id)?.parent)
 
     if (!parentItem) return []
