@@ -1,12 +1,12 @@
-import {Item, Id, HashMapId, HashMapParent, Store} from './types/index.js'
+import {TItem, Id, HashMapId, HashMapParent, Store} from './types/index.js'
 import items from './data.js'
 
 class TreeStore extends Store {
-  private readonly items: Item[]
+  private readonly items: TItem[]
   private hashMapId: HashMapId
   private hashMapParent: HashMapParent
 
-  constructor(items: Item[]) {
+  constructor(items: TItem[]) {
     super()
     this.items = items
     this.hashMapId = {}
@@ -15,7 +15,7 @@ class TreeStore extends Store {
   }
 
   private getHashMaps(): void {
-    this.items.forEach((item: Item) => {
+    this.items.forEach((item: TItem) => {
       this.hashMapId[item.id] = item
       this.hashMapParent[item.parent]
         ? this.hashMapParent[item.parent].push(item)
@@ -23,27 +23,27 @@ class TreeStore extends Store {
     })
   }
 
-  public getAll(): Item[] {
+  public getAll(): TItem[] {
     return this.items
   }
 
-  public getItem(id: Id): Item {
+  public getItem(id: Id): TItem {
     return this.hashMapId[id]
   }
 
-  public getChildren(id: Id): Item[] {
+  public getChildren(id: Id): TItem[] {
     return this.hashMapParent[id] || []
   }
 
-  public getAllChildren(id: Id): Item[] {
-    return this.getChildren(id).reduce<Item[]>((acc, cur) => {
+  public getAllChildren(id: Id): TItem[] {
+    return this.getChildren(id).reduce<TItem[]>((acc, cur) => {
       acc.push(cur)
       acc.push(...this.getAllChildren(cur.id))
       return acc
     }, [])
   }
 
-  public getAllParents(id: Id): Item[] {
+  public getAllParents(id: Id): TItem[] {
     const parentItem = this.getItem(this.getItem(id)?.parent)
 
     if (!parentItem) return []

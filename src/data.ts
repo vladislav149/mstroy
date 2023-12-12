@@ -1,6 +1,6 @@
-import {Item} from './types/index'
+import {TItem} from './types/index'
 
-const items: Item[] = [
+const items: TItem[] = [
   {id: 1, parent: 'root'},
   {id: 2, parent: 1, type: 'test'},
   {id: 3, parent: 1, type: 'test'},
