@@ -4,17 +4,17 @@ interface Item {
   id: Id
 }
 
-interface ItemRoot extends Item {
+interface ItemRoot {
   parent: 'root'
   type?: never
 }
 
-interface ItemChild extends Item {
+interface ItemChild {
   parent: number
   type: string | null
 }
 
-export type TItem = ItemRoot | ItemChild
+export type TItem = (ItemRoot | ItemChild) & Item
 
 export type HashMapId = {
   [id: Id]: TItem
