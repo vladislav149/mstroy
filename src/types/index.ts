@@ -6,11 +6,12 @@ interface Item {
 
 interface ItemRoot extends Item {
   parent: 'root'
+  type?: never
 }
 
 interface ItemChild extends Item {
   parent: number
-  type?: string | null
+  type: string | null
 }
 
 export type TItem = ItemRoot | ItemChild
